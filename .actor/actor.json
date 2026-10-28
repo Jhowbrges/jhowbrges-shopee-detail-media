@@ -1,6 +1,6 @@
 {
   "actorSpecification": 1,
-  "name": "shopee-detail-media",
+  "name": "jhowbrges-shopee-detail-media",
   "title": "Shopee Search, Gallery and Videos",
   "description": "Searches public Shopee Brazil product or category pages, enriches product metadata and available gallery/video URLs, and ranks visible sales counts descending.",
   "version": "0.1",

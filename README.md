@@ -65,10 +65,10 @@ npm test
 
 Para publicar pela sua conta, instale o Apify CLI (`npm install --global apify-cli`), autentique-se com `apify login` e, nesta pasta, execute `apify push`. Isso cria ou atualiza o Actor e inicia um build na Apify. Confira os custos e a configuração da conta antes de iniciar execuções; este repositório não contém credenciais.
 
-O ID do Actor será `<seu-usuario>~shopee-detail-media`. No `.env` do IDDA ONLINE, configure a busca por nome:
+O ID do Actor será `<seu-usuario>~jhowbrges-shopee-detail-media`. No `.env` do IDDA ONLINE, configure a busca por nome:
 
 ```dotenv
-APIFY_ATOR_SHOPEE=<seu-usuario>~shopee-detail-media
+APIFY_ATOR_SHOPEE=<seu-usuario>~jhowbrges-shopee-detail-media
 APIFY_ENTRADA_SHOPEE={"searchQuery":"{termo}","maxItems":{limite}}
 ```
 
