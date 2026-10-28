@@ -92,6 +92,9 @@ test('captures search product links with their nearest card text for sales ranki
             url: 'https://shopee.com.br/search?keyword=fone',
             title: 'Busca por fone',
             bodyText: 'Resultados de busca',
+            pageTextPreview: 'Resultados de busca',
+            anchorCount: 2,
+            productCardCount: 1,
             cards: [{ url: 'https://shopee.com.br/fone-i.1.12', text: 'Fone bluetooth 1.234 vendidos' }],
         });
     } finally {

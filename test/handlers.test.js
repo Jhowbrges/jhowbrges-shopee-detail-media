@@ -81,6 +81,9 @@ test('emits a blocked search diagnostic without a product URL or detail requests
         url: 'https://shopee.com.br/verify/traffic/error?type=4',
         title: '',
         bodyText: '',
+        pageTextPreview: 'Login Necessário',
+        anchorCount: 1,
+        productCardCount: 1,
         cards: [{ url: 'https://shopee.com.br/item-i.1.2', text: '1.000 vendidos' }],
     }));
 
@@ -96,6 +99,9 @@ test('emits a blocked search diagnostic without a product URL or detail requests
     assert.equal(output[0].searchUrl, input.searchUrl);
     assert.equal(output[0].pageUrl, 'https://shopee.com.br/verify/traffic/error?type=4');
     assert.equal(output[0].pageTitle, '');
+    assert.equal(output[0].pageTextPreview, 'Login Necessário');
+    assert.equal(output[0].anchorCount, 1);
+    assert.equal(output[0].productCardCount, 1);
     assert.equal(Object.hasOwn(output[0], 'url'), false);
 });
 
@@ -104,6 +110,9 @@ test('emits an empty-search diagnostic when the page has no product cards', asyn
         url: input.searchUrl,
         title: 'Busca',
         bodyText: 'Nenhum resultado',
+        pageTextPreview: 'Nenhum resultado',
+        anchorCount: 7,
+        productCardCount: 0,
         cards: [],
     }));
 
@@ -119,5 +128,8 @@ test('emits an empty-search diagnostic when the page has no product cards', asyn
     assert.equal(output[0].searchUrl, input.searchUrl);
     assert.equal(output[0].pageUrl, input.searchUrl);
     assert.equal(output[0].pageTitle, 'Busca');
+    assert.equal(output[0].pageTextPreview, 'Nenhum resultado');
+    assert.equal(output[0].anchorCount, 7);
+    assert.equal(output[0].productCardCount, 0);
     assert.equal(Object.hasOwn(output[0], 'url'), false);
 });

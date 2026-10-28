@@ -18,10 +18,12 @@ export function clearChallengeMedia(productData, pageInfo) {
 export async function captureSearchPage(page) {
     return page.evaluate(() => {
         const allowedHosts = new Set(['shopee.com.br', 'www.shopee.com.br']);
-        const productPath = /(?:^|[-/])i\.\d+\.\d+(?:\/|$)/i;
+        const productPath = /(?:^|[-/])i\.(\d+)\.(\d+)(?:\/|$)/i;
         const cards = [];
+        const productIds = new Set();
+        const anchors = Array.from(document.querySelectorAll('a[href]'));
 
-        for (const anchor of document.querySelectorAll('a[href]')) {
+        for (const anchor of anchors) {
             let url;
             try {
                 url = new URL(anchor.href, location.href);
@@ -29,12 +31,13 @@ export async function captureSearchPage(page) {
                 continue;
             }
 
+            const productMatch = url.pathname.match(productPath);
             if (!['http:', 'https:'].includes(url.protocol)
                 || url.username.length > 0
                 || url.password.length > 0
                 || url.port.length > 0
                 || !allowedHosts.has(url.hostname.toLowerCase())
-                || !productPath.test(url.pathname)) continue;
+                || !productMatch) continue;
 
             const card = anchor.closest('[data-sqe="item"]')
                 || anchor.closest('[data-testid*="item"]')
@@ -42,12 +45,17 @@ export async function captureSearchPage(page) {
                 || anchor.parentElement
                 || anchor;
             cards.push({ url: url.href, text: card.innerText || anchor.innerText || '' });
+            productIds.add(`${productMatch[1]}.${productMatch[2]}`);
         }
 
+        const bodyText = document.body?.innerText?.slice(0, 10_000) || '';
         return {
             url: location.href,
             title: document.title,
-            bodyText: document.body?.innerText?.slice(0, 10_000) || '',
+            bodyText,
+            pageTextPreview: bodyText.slice(0, 400),
+            anchorCount: anchors.length,
+            productCardCount: productIds.size,
             cards,
         };
     });

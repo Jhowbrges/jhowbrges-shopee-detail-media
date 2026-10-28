@@ -9,10 +9,18 @@ import {
 import { rankSearchResults } from './search.js';
 
 function searchDiagnostic(input, searchUrl, scrapingStatus, error, pageInfo = {}) {
+    const preview = pageInfo.pageTextPreview ?? pageInfo.bodyText;
     return {
         searchUrl,
         pageUrl: pageInfo.url ?? searchUrl,
         pageTitle: pageInfo.title ?? null,
+        pageTextPreview: typeof preview === 'string' ? preview.slice(0, 400) : null,
+        anchorCount: Number.isSafeInteger(pageInfo.anchorCount) && pageInfo.anchorCount >= 0
+            ? pageInfo.anchorCount
+            : null,
+        productCardCount: Number.isSafeInteger(pageInfo.productCardCount) && pageInfo.productCardCount >= 0
+            ? pageInfo.productCardCount
+            : null,
         searchQuery: input.searchQuery,
         categoryUrl: input.categoryUrl,
         scrapingStatus,
