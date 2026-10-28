@@ -1,0 +1,8 @@
+node_modules/
+storage/
+INPUT.json
+OUTPUT.json
+.apify/
+.env
+.env.*
+npm-debug.log*

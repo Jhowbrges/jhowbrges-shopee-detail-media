@@ -1,0 +1,30 @@
+{
+  "title": "Shopee Brazil search and product media",
+  "description": "Provide exactly one product-name query or Shopee Brazil category URL. Results are ranked by visible sold count when available.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchQuery": {
+      "title": "Product name",
+      "type": "string",
+      "description": "Search Shopee Brazil by product name. Use this or Category URL, not both.",
+      "editor": "textfield"
+    },
+    "categoryUrl": {
+      "title": "Category URL",
+      "type": "string",
+      "description": "A Shopee Brazil category page URL containing its category ID. Use this or Product name, not both.",
+      "editor": "textfield"
+    },
+    "maxItems": {
+      "title": "Maximum products",
+      "type": "integer",
+      "description": "Maximum number of products to inspect from the loaded search page (1–50).",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 50,
+      "editor": "number"
+    }
+  },
+  "required": []
+}
