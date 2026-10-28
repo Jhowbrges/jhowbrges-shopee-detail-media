@@ -94,6 +94,8 @@ test('emits a blocked search diagnostic without a product URL or detail requests
     assert.equal(output.length, 1);
     assert.equal(output[0].scrapingStatus, 'blocked');
     assert.equal(output[0].searchUrl, input.searchUrl);
+    assert.equal(output[0].pageUrl, 'https://shopee.com.br/verify/traffic/error?type=4');
+    assert.equal(output[0].pageTitle, '');
     assert.equal(Object.hasOwn(output[0], 'url'), false);
 });
 
@@ -115,5 +117,7 @@ test('emits an empty-search diagnostic when the page has no product cards', asyn
     assert.equal(output.length, 1);
     assert.equal(output[0].scrapingStatus, 'empty');
     assert.equal(output[0].searchUrl, input.searchUrl);
+    assert.equal(output[0].pageUrl, input.searchUrl);
+    assert.equal(output[0].pageTitle, 'Busca');
     assert.equal(Object.hasOwn(output[0], 'url'), false);
 });

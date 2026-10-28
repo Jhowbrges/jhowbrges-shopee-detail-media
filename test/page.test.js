@@ -22,6 +22,14 @@ test('does not classify an ordinary product page as a traffic challenge', () => 
     }), false);
 });
 
+test('detects Shopee login-verification text when the search URL is unchanged', () => {
+    assert.equal(isBlocked({
+        url: 'https://shopee.com.br/search?keyword=iphone+18',
+        title: 'Shopee Brasil | Ofertas incríveis. Melhores preços do mercado',
+        bodyText: 'Login Necessário. Parece que você ainda não está logado. Faça login para continuar ou volte para a página inicial.',
+    }), true);
+});
+
 test('reports traffic verification as blocked, image results as ok, and missing images as partial', () => {
     assert.equal(status(
         { url: 'https://shopee.com.br/verify/traffic/error?type=4' },

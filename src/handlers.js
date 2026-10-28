@@ -8,9 +8,11 @@ import {
 } from './page.js';
 import { rankSearchResults } from './search.js';
 
-function searchDiagnostic(input, searchUrl, scrapingStatus, error) {
+function searchDiagnostic(input, searchUrl, scrapingStatus, error, pageInfo = {}) {
     return {
         searchUrl,
+        pageUrl: pageInfo.url ?? searchUrl,
+        pageTitle: pageInfo.title ?? null,
         searchQuery: input.searchQuery,
         categoryUrl: input.categoryUrl,
         scrapingStatus,
@@ -51,7 +53,7 @@ export function createActorHandlers({
             if (isTrafficVerificationPage(snapshot)) {
                 const error = 'Shopee returned a traffic-verification page; the Actor stopped without bypassing it.';
                 log.warning(error);
-                await pushData(searchDiagnostic(input, request.url, 'blocked', error));
+                await pushData(searchDiagnostic(input, request.url, 'blocked', error, snapshot));
                 return;
             }
 
@@ -59,7 +61,7 @@ export function createActorHandlers({
             if (products.length === 0) {
                 const error = 'No public Shopee product cards were found on the search page.';
                 log.warning(error);
-                await pushData(searchDiagnostic(input, request.url, 'empty', error));
+                await pushData(searchDiagnostic(input, request.url, 'empty', error, snapshot));
                 return;
             }
 

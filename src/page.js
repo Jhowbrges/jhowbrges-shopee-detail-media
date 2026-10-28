@@ -1,6 +1,8 @@
 export function isTrafficVerificationPage({ url = '', title = '', bodyText = '' } = {}) {
+    const pageText = `${title}\n${bodyText}`;
     return /\/verify\/traffic\/error(?:[/?#]|$)/i.test(String(url))
-        || /traffic verification|verifica(?:ç|c)[ãa]o de tr[aá]fego|captcha/i.test(`${title}\n${bodyText}`);
+        || /traffic verification|verifica(?:ç|c)[ãa]o de tr[aá]fego|captcha/i.test(pageText)
+        || /login\s+necess[aá]rio|login\s+required|ainda\s+n[aã]o\s+est[aá]\s+logad[oa]/i.test(pageText);
 }
 
 export function getScrapingStatus(pageInfo, productData) {

@@ -50,7 +50,7 @@ Um item por produto, na ordem de vendas descrita acima:
 }
 ```
 
-O Actor preserva os campos aceitos pelo conector do IDDA ONLINE e acrescenta `soldCount` e `salesRank`. Campos não expostos ficam `null` ou listas vazias. `scrapingStatus` pode ser `ok` (ao menos uma imagem encontrada), `partial` (página de produto aberta sem imagem detectada), `blocked` (sinais conhecidos de verificação de tráfego) ou `error` (falha ao abrir um produto). Bloqueio, falha ou busca sem produtos geram um item de diagnóstico com `searchUrl`, sem `url` de produto.
+O Actor preserva os campos aceitos pelo conector do IDDA ONLINE e acrescenta `soldCount` e `salesRank`. Campos não expostos ficam `null` ou listas vazias. `scrapingStatus` pode ser `ok` (ao menos uma imagem encontrada), `partial` (página de produto aberta sem imagem detectada), `blocked` (sinais conhecidos de verificação de tráfego) ou `error` (falha ao abrir um produto). Bloqueio, falha ou busca sem produtos geram um item de diagnóstico com `searchUrl`, `pageUrl` e `pageTitle`, sem `url` de produto.
 
 “Galeria completa” significa todas as URLs de imagem e vídeo que a página pública disponibilizou durante a execução. A Shopee pode ocultar mídias, alterar o formato da página ou exigir verificação; o Actor não faz login, não usa cookies de conta, proxies, modo stealth, endpoints privados ou resolução de desafios. Outras telas de bloqueio podem não ser reconhecidas. URLs de vídeo são retornadas como links; os arquivos não são baixados.
 

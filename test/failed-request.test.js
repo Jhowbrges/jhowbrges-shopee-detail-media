@@ -35,6 +35,8 @@ test('reports failed search navigation without emitting a product URL', async ()
 
     assert.deepEqual(pushed, [{
         searchUrl: 'https://shopee.com.br/search?keyword=fone',
+        pageUrl: 'https://shopee.com.br/search?keyword=fone',
+        pageTitle: null,
         searchQuery: 'fone',
         categoryUrl: null,
         scrapingStatus: 'error',

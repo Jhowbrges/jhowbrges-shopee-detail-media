@@ -9,6 +9,8 @@ export function createFailedRequestHandler(pushData) {
         if (request.userData?.kind === 'search') {
             await pushData({
                 searchUrl: request.url,
+                pageUrl: request.url,
+                pageTitle: null,
                 searchQuery: request.userData.searchQuery ?? null,
                 categoryUrl: request.userData.categoryUrl ?? null,
                 scrapingStatus: 'error',
